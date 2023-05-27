@@ -1,11 +1,13 @@
 package com.example.demo;
 import com.fazecast.jSerialComm.SerialPort;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class SerialComm {
 
-    public boolean ligado;
+    public int estado;
     SerialPort arduino = SerialPort.getCommPort("COM3");
+    PrintWriter arduinoOut = new PrintWriter(arduino.getOutputStream());
 
     public SerialComm () throws InterruptedException {
 
@@ -27,19 +29,14 @@ public class SerialComm {
 
     }
 
-    public void setEstado(boolean ligado) throws IOException {
+    public void setEstado(int estado) throws IOException {
 
-        this.ligado = ligado;
 
-            if (ligado == true) {
+        this.estado = estado;
 
-                arduino.getOutputStream().write('1');
+        arduinoOut.println(this.estado);
+        arduinoOut.flush();
 
-            } else {
-
-                arduino.getOutputStream().write('2');
-
-            }
 
     }
 }

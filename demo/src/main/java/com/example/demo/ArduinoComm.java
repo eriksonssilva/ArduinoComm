@@ -23,7 +23,7 @@ public class ArduinoComm {
 	@PostMapping("/")
 
 
-	public void arduinoCommand(@RequestParam(value = "command") boolean command) throws IOException, InterruptedException {
+	public void arduinoCommand(@RequestParam(value = "command") int command) throws IOException {
 
 		comm.setEstado(command);
 
