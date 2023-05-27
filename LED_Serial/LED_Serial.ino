@@ -1,35 +1,32 @@
-#define myLed 2
+const int numLeds = 3;
+int ledArray[numLeds] = { 2, 3, 10};
 
 void setup() {
 
-  pinMode(myLed, OUTPUT);
-
   Serial.begin(9600);
 
-  while (!Serial);  
+  for (int i = 0; i < numLeds; i++) {
 
+    pinMode(ledArray[i], OUTPUT);
+    digitalWrite(ledArray[i], HIGH);
+  }
+
+  while (!Serial);
 }
 
 void loop() {
 
   if (Serial.available()) {
 
-    char ledState = Serial.read();
+    int command = Serial.parseInt();
 
-    if (ledState == '1') {
+    for (int i = 0; i < numLeds; i++) {
+      
+      if (command == ledArray[i]) {
 
-      digitalWrite(myLed, HIGH);
+        digitalWrite(ledArray[i], !digitalRead(ledArray[i]));
 
-    }
-
-    else if (ledState == '2') {
-
-      digitalWrite(myLed, LOW);
-
-    }
-
-    else {
-
+      }
     }
   }
 }
