@@ -2,6 +2,7 @@ package com.example.demo;
 import java.io.IOException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ArduinoComm {
 
-	SerialComm comm;
+	SerialComm serialPort;
 
-	public ArduinoComm() throws InterruptedException {
-		comm = new SerialComm();
+	public ArduinoComm() {
+		serialPort = new SerialComm();
 	}
 
 	public static void main(String[] args) {
@@ -21,11 +22,18 @@ public class ArduinoComm {
 	}
 
 	@PostMapping("/")
+	public void arduinoSet(@RequestParam(value = "command") String command) throws IOException {
 
+		serialPort.setState(command);
 
-	public void arduinoCommand(@RequestParam(value = "command") int command) throws IOException {
+	}
 
-		comm.setEstado(command);
+	@GetMapping("/")
+	public String arduinoGet(@RequestParam(value = "command") String command) throws IOException, InterruptedException {
+
+		serialPort.getState(command);
+		return serialPort.getState;
+
 
 	}
 }

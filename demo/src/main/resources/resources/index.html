@@ -6,9 +6,14 @@
 </head>
 <body>
 
-<p><input type="checkbox" id="red" onclick="post(10)">Interruptor Vermelho</input></p>
-<p><input type="checkbox" id="green" onclick="post(3)">Interruptor Verde</input></p>
-<p><input type="checkbox" id="blue" onclick="post(2)">Interruptor Azul</input></p>
+<p><input type="checkbox" id="redSet" onclick="post('S4')">Interruptor Vermelho</input></p>
+<p><input type="checkbox" id="greenSet" onclick="post('S3')">Interruptor Verde</input></p>
+<p><input type="checkbox" id="blueSet" onclick="post('S2')">Interruptor Azul</input></p>
+
+<p><button type="button" id="redGet" onclick="get('G4')">Checar Led Vermelho</button>&nbsp;&nbsp;&nbsp;&nbsp;<label id="redLabel"></label></p>
+<p><button type="button" id="greenGet" onclick="get('G3')">Checar Led Verde</button>&nbsp;&nbsp;&nbsp;&nbsp;<label id="greenLabel"></label></p>
+<p><button type="button" id="blueGet" onclick="get('G2')">Checar Led Azul</button>&nbsp;&nbsp;&nbsp;&nbsp;<label id="blueLabel"></label></p>
+
 <script src="fun.js"></script>
 </body>
 </html>
