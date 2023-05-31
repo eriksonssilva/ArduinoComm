@@ -31,9 +31,7 @@ public class ArduinoComm {
 	@GetMapping("/")
 	public String arduinoGet(@RequestParam(value = "command") String command) throws IOException, InterruptedException {
 
-		serialPort.getState(command);
-		return serialPort.getState;
-
+		return serialPort.getState(command);
 
 	}
 }

@@ -6,8 +6,6 @@ import java.io.PrintWriter;
 
 public class SerialComm {
 
-    public String setState;
-    public String getState;
     SerialPort arduino = SerialPort.getCommPort("COM3");
     PrintWriter arduinoOut = new PrintWriter(arduino.getOutputStream());
     InputStream in = arduino.getInputStream();
@@ -30,16 +28,14 @@ public class SerialComm {
         }
     }
 
-    public void setState(String setState) throws IOException {
+    public void setState(String state) {
 
-        this.setState = setState;
-
-        arduinoOut.print(this.setState);
+        arduinoOut.print(state);
         arduinoOut.flush();
 
     }
 
-    public void getState(String command) throws IOException, InterruptedException {
+    public String getState(String command) throws IOException, InterruptedException {
 
         arduinoOut.print(command);
         arduinoOut.flush();
@@ -55,23 +51,33 @@ public class SerialComm {
 
         }
 
-        setLabel(state, command);
+        return calculateLabelState(command, state);
+
     }
 
-    public void setLabel(char state, String command) {
+    public String calculateLabelState (String command, char state) {
 
         int ledPosition = Integer.parseInt(command.substring(1));
+
+        String labelState = "";
 
         for (int i = 0; i < led.length; i++) {
 
             if (ledPosition == led[i]) {
 
                 if (state == '0') {
-                    getState = "O Led " + colors[i] + " está Ligado";
+
+                    labelState = "O Led " + colors[i] + " está Ligado";
+
                 } else {
-                    getState = "O Led " + colors[i] + " está Desligado";
+
+                    labelState = "O Led " + colors[i] + " está Desligado";
+
                 }
             }
         }
+
+        return labelState;
+
     }
 }
